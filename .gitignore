@@ -1,5 +1,7 @@
 *.log
 
 .idea/
+.pytest_cache/
+.vscode/
 __pycache__/
 venv/
