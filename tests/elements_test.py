@@ -1,5 +1,4 @@
-
-from pages.element_page import TextBoxPage
+from pages.element_page import TextBoxPage, CheckBoxPage
 
 
 class TestElements:
@@ -13,3 +12,11 @@ class TestElements:
             assert email == output_email, "the email does not match"
             assert current_address == output_current_address, "the current address does not match"
             assert permanent_address == output_permanent_address, "the permanent address does not match"
+
+    class TestCheckBox:
+        def test_check_box(self, driver):
+            check_box_page = CheckBoxPage(driver, "https://demoqa.com/checkbox")
+            check_box_page.open()
+            check_box_page.open_full_list()
+            check_box_page.click_random_checkbox()
+            
