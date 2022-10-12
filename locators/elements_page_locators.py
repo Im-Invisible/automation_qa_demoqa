@@ -42,3 +42,5 @@ class WebTablePageLocators:
     DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id="department"]')
     SUBMIT = (By.CSS_SELECTOR, 'button[id="submit"]')
 
+    # tables
+    FULL_PEOPLE_LIST = (By.CSS_SELECTOR, 'div[class="rt-tr-group"]')
