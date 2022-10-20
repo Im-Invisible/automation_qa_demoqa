@@ -26,7 +26,7 @@ class BasePage:
     def elements_are_present(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
-    def elements_are_clickable(self, locator, timeout=5):
+    def element_is_clickable(self, locator, timeout=5):
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     def go_to_element(self, element):
