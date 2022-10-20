@@ -1,3 +1,4 @@
+import base64
 import os
 import random
 import time
@@ -205,3 +206,14 @@ class UploadAndDownloadPage(BasePage):
         text = self.element_is_present(self.locators.UPLOADED_FILE).text
         return file_name.split('\\')[1], text.split('\\')[-1]
 
+    def download_file(self):
+        link = self.element_is_present(self.locators.DOWNLOAD_FILE).get_attribute('href')
+        link_decode = base64.b64decode(link)
+        path_name_file = rf'W:\filetest{random.randint(0,999)}.jpeg'
+        with open(path_name_file, 'wb+') as f:
+            offset = link_decode.find(b'\xff\xd8')
+            f.write(link_decode[offset:])
+            check_file = os.path.exists(path_name_file)
+            f.close()
+        os.remove(path_name_file)
+        return check_file
