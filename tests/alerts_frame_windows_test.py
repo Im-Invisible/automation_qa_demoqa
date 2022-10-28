@@ -1,8 +1,9 @@
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage, \
+    ModalDialogsPage
 
 
 class TestAlertsFrameWindow:
-    class TestBrowserWindows:
+    class TestBrowserWindowsPage:
         def test_new_tab(self, driver):
             browser_windows_page = BrowserWindowsPage(driver, 'https://demoqa.com/browser-windows')
             browser_windows_page.open()
@@ -42,7 +43,7 @@ class TestAlertsFrameWindow:
             text, alert_text = alert_page.check_prompt_alert()
             assert text in alert_text, 'Alert did not show up'
 
-    class TestFrames:
+    class TestFramesPage:
         def test_frames(self, driver):
             frame_page = FramesPage(driver, 'https://demoqa.com/frames')
             frame_page.open()
@@ -51,10 +52,25 @@ class TestAlertsFrameWindow:
             assert result_frame_1 == ['This is a sample page', '500px', '350px'], 'The frame does not exist'
             assert result_frame_2 == ['This is a sample page', '100px', '100px'], 'The frame does not exist'
 
-    class TestNestedFrames:
+    class TestNestedFramesPage:
         def test_nested_frames(self, driver):
             nested_frame_page = NestedFramesPage(driver, 'https://demoqa.com/nestedframes')
             nested_frame_page.open()
             parent_text, child_text = nested_frame_page.check_nested_frame()
             assert parent_text == 'Parent frame', 'Nested frame does not exist'
             assert child_text == 'Child Iframe', 'Nested frame does not exist'
+
+    class TestModalDialogsPage:
+        def test_small_modal_dialog_page(self, driver):
+            modal_dialog_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+            modal_dialog_page.open()
+            small = modal_dialog_page.check_small_modal_dialog()
+            assert small[0] == 'Small Modal'
+            assert small[1] == 47
+
+        def test_large_modal_dialog_page(self, driver):
+            modal_dialog_page = ModalDialogsPage(driver, 'https://demoqa.com/modal-dialogs')
+            modal_dialog_page.open()
+            large = modal_dialog_page.check_large_modal_dialog()
+            assert large[0] == 'Large Modal'
+            assert large[1] == 574
