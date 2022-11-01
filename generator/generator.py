@@ -1,8 +1,7 @@
 import random
 
-from data.data import Person
+from data.data import Person, Color
 from faker import Faker
-
 
 faker_ua = Faker('uk_UA')
 Faker.seed()
@@ -24,8 +23,14 @@ def generated_person():
 
 
 def generated_file():
-    path = rf'W:\filetest{random.randint(0,999)}.txt'
+    path = rf'W:\filetest{random.randint(0, 999)}.txt'
     file = open(path, 'w+')
-    file.write(f'Hello World{random.randint(0,999)}')
+    file.write(f'Hello World{random.randint(0, 999)}')
     file.close()
     return file.name, path
+
+
+def generated_color():
+    yield Color(
+        color_name=["Red", "Blue", "Green", "Yellow", "Purple", "Black", "White", "Voilet", "Indigo", "Magenta", "Aqua"]
+    )
